@@ -1,0 +1,22 @@
+table {
+    font-size: 26px;
+}
+table.table-hover tbody tr td.translate {
+    color: transparent;
+}
+table.table-hover tbody tr td.translate:hover {
+    color: #212529;
+}
+table .word-wrapper:hover .translation-word{
+    text-decoration: underline;
+}
+table .word-wrapper .translation-cross{
+    font-size: 18px;
+    text-align: center;
+}
+table .word-wrapper .translation-cross:hover{
+    text-shadow: #515253 1px 1px 5px;
+    cursor: pointer;
+}
+
+
