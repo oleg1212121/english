@@ -8,15 +8,18 @@ use Illuminate\Http\Request;
 
 class WordController extends Controller
 {
+    const DEFAULT_FREQUENCY = 3000;
+    const DEFAULT_PAGINATE = 100;
+
     public function index(Request $request)
     {
         $ratings = $request->input('ratings', []);
-        $frequency = $request->input('frequency', 3000);
+        $frequency = $request->input('frequency', static::DEFAULT_FREQUENCY);
         $words = Word::when($frequency, function ($query, $frequency) {
             return $query->where('frequency', '<=', $frequency);
         })->when($ratings, function ($query, $ratings) {
             return $query->whereIn('known', $ratings);
-        })->with(['translations'])->orderBy('frequency')->orderBy('word')->paginate(100);
+        })->with(['translations'])->orderBy('frequency')->orderBy('word')->paginate(static::DEFAULT_PAGINATE);
 
         return view('words.word_list', compact('words', 'frequency', 'ratings'));
     }
@@ -24,19 +27,19 @@ class WordController extends Controller
     public function reverse(Request $request)
     {
         $ratings = $request->input('ratings', []);
-        $frequency = $request->input('frequency', 3000);
+        $frequency = $request->input('frequency', static::DEFAULT_FREQUENCY);
         $words = Word::when($frequency, function ($query, $frequency) {
             return $query->where('frequency', '<=', $frequency);
         })->when($ratings, function ($query, $ratings) {
             return $query->whereIn('known', $ratings);
-        })->with(['translations'])->orderBy('frequency')->orderBy('word')->paginate(100);
+        })->with(['translations'])->orderBy('frequency')->orderBy('word')->paginate(static::DEFAULT_PAGINATE);
 
         return view('words.word_list_reverse', compact('words', 'frequency', 'ratings'));
     }
 
     public function statistic(Request $request)
     {
-        $frequency = $request->input('frequency', 3000);
+        $frequency = $request->input('frequency', static::DEFAULT_FREQUENCY);
 
         $groups = \DB::table('words')
             ->select(\DB::raw('count(*) as count, known'))
