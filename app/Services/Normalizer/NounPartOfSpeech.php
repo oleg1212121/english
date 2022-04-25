@@ -41,12 +41,12 @@ class NounPartOfSpeech extends BasePartOfSpeech
         $lemma = static::getDictValue(static::$cacheWords, $word);
         if($lemma) return $lemma;
 
-        # Проверим, если слово уже в нормализованном виде, вернем его же
-        if(static::isDefined($word)) return $word;
-
         # Пройдемся по исключениям, если слово из исключений, вернем его нормализованную форму
         $lemma = static::getDictValue(static::$exceptions, $word);
         if($lemma) return $lemma;
+
+        # Проверим, если слово уже в нормализованном виде, вернем его же
+        if(static::isDefined($word)) return $word;
 
         # Если существительное заканчивается на "ful", значит отбрасываем "ful", нормализуем оставшееся слово, а потом суффикс приклеиваем назад.
         # Таким образом, к примеру, из слова "spoonsful" после нормализации получится "spoonful"
