@@ -15,12 +15,12 @@ class CreateLemmasFormsTable extends Migration
     {
         Schema::create('lemmas_forms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lemma_rank')->nullable(false)->comment("Lemma's rank. Foreign key.");
+            $table->unsignedBigInteger('lemma_id')->nullable(false)->comment("Lemma's id. Foreign key.");
             $table->string('lemma_form')->nullable(false)->comment("Lemma's form value");
+            $table->boolean('is_exception')->default(false)->comment("Lemma's equal value");
 
-            $table->foreign('lemma_rank')->references('item_rank')->on('lemmas')
-                ->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->unique(['lemma_form', 'lemma_rank']);
+            $table->foreign('lemma_id')->references('id')->on('lemmas')->onDelete('CASCADE');
+            $table->unique(['lemma_form', 'lemma_id']);
         });
     }
 

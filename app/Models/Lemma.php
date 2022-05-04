@@ -10,5 +10,6 @@ class Lemma extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'lemmas';
-    protected $fillable = ['lemma', 'pos', 'frequency', 'item_rank'];
+//    protected $fillable = ['lemma', 'pos', 'frequency'];
+    protected $fillable = ['lemma', 'frequency'];
 }
