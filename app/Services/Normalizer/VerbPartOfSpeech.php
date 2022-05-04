@@ -9,7 +9,7 @@ class VerbPartOfSpeech extends BasePartOfSpeech
     public function __construct($pathDict, $excFile, $indexFile)
     {
         parent::__construct($pathDict, $excFile, $indexFile);
-        static::$rule = [
+        $this->rule = [
             ["s"   , ""  ],
             ["ies" , "y" ],
             ["es"  , "e" ],

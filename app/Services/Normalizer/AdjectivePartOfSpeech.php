@@ -9,7 +9,7 @@ class AdjectivePartOfSpeech extends BasePartOfSpeech
     public function __construct($pathDict, $excFile, $indexFile)
     {
         parent::__construct($pathDict, $excFile, $indexFile);
-        static::$rule = [
+        $this->rule = [
             ["er", ""],
             ["er", "e"],
             ["est", ""],
