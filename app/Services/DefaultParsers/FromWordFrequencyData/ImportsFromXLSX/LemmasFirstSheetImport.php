@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports;
+namespace App\Services\DefaultParsers\FromWordFrequencyData\ImportsFromXLSX;
 
 use App\Models\Lemma;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class LemmasSheetImport implements ToModel, WithUpserts, WithChunkReading, WithStartRow, ShouldQueue
+class LemmasFirstSheetImport implements ToModel, WithUpserts, WithChunkReading, WithStartRow, ShouldQueue
 {
     const PARTS_OF_SPEECH = [
         'a' => 'article',
@@ -31,7 +31,7 @@ class LemmasSheetImport implements ToModel, WithUpserts, WithChunkReading, WithS
 
     public function model(array $row)
     {
-        $pos = static::PARTS_OF_SPEECH[strtolower($row[2])] ?? '-';
+        $pos = static::PARTS_OF_SPEECH[strtolower($row[2])] ?? 'noun';
         $lemma = $row[1] ?? null;
         $rank = intval($row[0]) ?? null;
         if(isset($lemma) && isset($rank)){
@@ -39,7 +39,6 @@ class LemmasSheetImport implements ToModel, WithUpserts, WithChunkReading, WithS
                 'lemma' => $lemma,
                 'pos' => $pos,
                 'frequency' => $rank,
-                'item_rank' => $rank,
             ]);
         }
         return null;

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Imports;
+
+namespace App\Services\DefaultParsers\FromWordFrequencyData\ImportsFromXLSX;
+
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -11,8 +13,8 @@ class LemmasImport implements WithMultipleSheets, ShouldQueue, WithChunkReading
     public function sheets(): array
     {
         return [
-            1 => new LemmasSheetImport(),
-            3 => new LemmasWordsSheetImport()
+//            1 => new LemmasFirstSheetImport(),
+            3 => new LemmasWordsThirdSheetImport()
         ];
     }
 
