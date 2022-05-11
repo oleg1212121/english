@@ -6,7 +6,7 @@ use App\Models\Translation;
 use App\Models\Word;
 use Illuminate\Http\Request;
 
-class WordController extends Controlle
+class WordController extends Controller
 {
     public function index(Request $request)
     {
