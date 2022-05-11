@@ -10,4 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    const DEFAULT_FREQUENCY = 3000;
+    const DEFAULT_PAGINATE = 100;
 }

@@ -6,11 +6,8 @@ use App\Models\Translation;
 use App\Models\Word;
 use Illuminate\Http\Request;
 
-class WordController extends Controller
+class WordController extends Controlle
 {
-    const DEFAULT_FREQUENCY = 3000;
-    const DEFAULT_PAGINATE = 100;
-
     public function index(Request $request)
     {
         $ratings = $request->input('ratings', []);
