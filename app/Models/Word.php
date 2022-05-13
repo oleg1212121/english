@@ -14,4 +14,10 @@ class Word extends Model
     {
         return $this->belongsToMany(Translation::class);
     }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(DictionaryTag::class, "dictionary_tag_word", "word_id", "tag_id");
+    }
 }
