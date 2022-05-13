@@ -18,4 +18,5 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/words', [\App\Http\Controllers\WordController::class, 'index'])->name('words.index');
 Route::get('/words/reverse', [\App\Http\Controllers\WordController::class, 'reverse'])->name('words.reverse');
+Route::get('/dictionary-tags/{tag}/words/reverse', [\App\Http\Controllers\DictionaryWordController::class, 'reverse'])->name('dictionary.words.reverse');
 Route::get('/statistic', [\App\Http\Controllers\WordController::class, 'statistic'])->name('statistic.index');
