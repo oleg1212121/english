@@ -7,6 +7,7 @@ use App\Models\Word;
 use App\Services\DictionaryTagsServices\WordsToTagsAttachService;
 use Illuminate\Http\Request;
 
+
 class DictionaryWordController extends Controller
 {
     public function reverse(Request $request, DictionaryTag $tag)
@@ -19,7 +20,7 @@ class DictionaryWordController extends Controller
             return $query->where('frequency', '<=', $frequency);
         })->when($ratings, function ($query, $ratings) {
             return $query->whereIn('known', $ratings);
-        })->with(['translations', 'tags'])->orderBy('frequency')->orderBy('word')->paginate(static::DEFAULT_PAGINATE);
+        })->with(['translations', 'tags'])->orderBy('frequency')->paginate(static::DEFAULT_PAGINATE);
 
         return view('words.word_list_reverse', compact('words', 'frequency', 'ratings'));
     }
