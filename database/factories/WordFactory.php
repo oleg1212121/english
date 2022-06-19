@@ -14,9 +14,9 @@ class WordFactory extends Factory
     public function definition()
     {
         return [
-            'word' => str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+            'word' => str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.time()),
             'description' => 'Some test description of the word',
-            'frequency' => rand(150, 10000),
+            'frequency' => rand(151, 9999),
             'known' => array_rand([0,1,2,3,4,5,6,7,8,9,10]),
         ];
     }

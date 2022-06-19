@@ -40,14 +40,14 @@ class WordController extends Controller
 
         $groups = \DB::table('words')
             ->select(\DB::raw('count(*) as count, known'))
-            ->whereIn('known', range(1,10))
+            ->whereIn('known', range(0,10))
             ->where('frequency', '<=', $frequency)
             ->groupBy('known')
             ->orderBy('known', 'desc')
             ->get();
 
         $statistic = [
-            'stat' => ['10' => 0, '9' => 0, '8' => 0, '7' => 0, '6' => 0, '5' => 0, '4' => 0, '3' => 0, '2' => 0, '1' => 0],
+            'stat' => ['10' => 0, '9' => 0, '8' => 0, '7' => 0, '6' => 0, '5' => 0, '4' => 0, '3' => 0, '2' => 0, '1' => 0, '0' => 0],
             'sum' => 0
         ];
 

@@ -16,7 +16,7 @@ class WordControllerTest extends TestCase
     protected $controller = null;
     protected $ratings = [];
     protected $frequency = 0;
-    protected const NUMBER_OF_THE_ROWS = 3;
+    protected $numberOfTheWords = 3;
 
     public function setUp() : void
     {
@@ -26,7 +26,7 @@ class WordControllerTest extends TestCase
         $this->frequency = 10000;
 
         Word::factory()
-            ->count(static::NUMBER_OF_THE_ROWS)->create();
+            ->count($this->numberOfTheWords)->create();
     }
 
     public function test_index()
@@ -38,7 +38,7 @@ class WordControllerTest extends TestCase
 
         $return = $this->controller->index($request);
         $data = $return->getData();
-        $this->assertTrue(static::NUMBER_OF_THE_ROWS === $data["words"]->total(), "Number of the rows is wrong");
+        $this->assertTrue($this->numberOfTheWords === $data["words"]->total(), "Number of the rows is wrong");
         $this->assertTrue($this->ratings === $data["ratings"], "The 'ratings' variable is wrong");
         $this->assertTrue($this->frequency === $data["frequency"], "The 'frequency' variable is wrong");
     }
@@ -53,7 +53,7 @@ class WordControllerTest extends TestCase
 
         $return = $this->controller->reverse($request);
         $data = $return->getData();
-        $this->assertTrue(static::NUMBER_OF_THE_ROWS === $data["words"]->total(), "Number of the rows is wrong");
+        $this->assertTrue($this->numberOfTheWords === $data["words"]->total(), "Number of the rows is wrong");
         $this->assertTrue($this->ratings === $data["ratings"], "The 'ratings' variable is wrong");
         $this->assertTrue($this->frequency === $data["frequency"], "The 'frequency' variable is wrong");
     }
@@ -65,9 +65,8 @@ class WordControllerTest extends TestCase
         ]);
         $return = $this->controller->statistic($request);
         $data = $return->getData();
-
         $this->assertTrue(is_array($data['statistic']['stat']), "The 'stat' variable is not an array");
-        $this->assertTrue(static::NUMBER_OF_THE_ROWS === $data['statistic']['sum'], "Number of the rows is wrong");
+        $this->assertTrue($this->numberOfTheWords === $data['statistic']['sum'], "Number of the rows is wrong");
         $this->assertTrue($this->frequency === $data["frequency"], "The 'frequency' variable is wrong");
     }
 }
