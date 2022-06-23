@@ -21,7 +21,7 @@ class DictionaryWordControllerTest extends TestCase
     protected $ratings = [];
     protected $frequency = 0;
     protected $request = null;
-    protected const NUMBER_OF_THE_ROWS = 3;
+    protected $numberOfTheRows = 3;
 
     public function setUp() : void
     {
@@ -37,7 +37,7 @@ class DictionaryWordControllerTest extends TestCase
 
         Word::factory()
             ->hasAttached($tag, [], 'tags')
-            ->count(static::NUMBER_OF_THE_ROWS)->create();
+            ->count($this->numberOfTheRows)->create();
 
 
         $this->request = Request::create("/dictionary-tags/{$this->tag->id}/words/reverse", 'GET',[
@@ -51,7 +51,7 @@ class DictionaryWordControllerTest extends TestCase
     {
         $return = $this->controller->reverse($this->request, $this->tag);
         $data = $return->getData();
-        $this->assertTrue(static::NUMBER_OF_THE_ROWS === $data["words"]->total(), "Number of the rows is wrong");
+        $this->assertTrue($this->numberOfTheRows === $data["words"]->total(), "Number of the rows is wrong");
         $this->assertTrue($this->ratings === $data["ratings"], "The 'ratings' variable is wrong");
         $this->assertTrue($this->frequency === $data["frequency"], "The 'frequency' variable is wrong");
     }
